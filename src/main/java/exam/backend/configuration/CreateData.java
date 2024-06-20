@@ -60,10 +60,10 @@ public class CreateData implements CommandLineRunner {
         Discipline highJump = disciplinesByName.get("High jump");
         Discipline discosThrow = disciplinesByName.get("Discos throw");
 
-        Participant participant1 = new Participant("Daniel", Gender.MALE, Club.Aalborg, 25, List.of(sprint100m, longJump));
-        Participant participant2 = new Participant("Line", Gender.FEMALE, Club.Aarhus, 30, List.of(highJump, discosThrow));
-        Participant participant3 = new Participant("Erik", Gender.MALE, Club.Copenhagen, 35, List.of(sprint100m, highJump));
-        Participant participant4 = new Participant("Mette", Gender.FEMALE, Club.Odense, 40, List.of(longJump, discosThrow));
+        Participant participant1 = new Participant("Daniel", Gender.MALE, "Aalborg", 25, List.of(sprint100m, longJump));
+        Participant participant2 = new Participant("Line", Gender.FEMALE, "Aarhus", 30, List.of(highJump, discosThrow));
+        Participant participant3 = new Participant("Erik", Gender.MALE, "Copenhagen", 35, List.of(sprint100m, highJump));
+        Participant participant4 = new Participant("Mette", Gender.FEMALE, "Odense", 40, List.of(longJump, discosThrow));
 
         List<Participant> participants = List.of(participant1, participant2, participant3, participant4);
 

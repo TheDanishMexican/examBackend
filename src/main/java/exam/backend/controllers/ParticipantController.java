@@ -1,10 +1,10 @@
 package exam.backend.controllers;
 
+import exam.backend.dto.ParticipantDto;
 import exam.backend.entities.Participant;
 import exam.backend.services.ParticipantService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +20,11 @@ public class ParticipantController {
     @GetMapping
     public List<Participant> getAllParticipants() {
         return participantService.getAllParticipants();
+    }
+
+    @PostMapping
+    public ResponseEntity<ParticipantDto> addParticipant(@RequestBody ParticipantDto request) {
+       return ResponseEntity.ok(participantService.addParticipant(request));
     }
 
 }

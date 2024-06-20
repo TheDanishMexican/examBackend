@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,15 +21,14 @@ public class Participant {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Enumerated(EnumType.STRING)
-    private Club club;
+    private String club;
 
     private Integer age;
 
     @ManyToMany
     private List<Discipline> disciplines;
 
-    public Participant(String name, Gender gender, Club club, Integer age, List<Discipline> disciplines) {
+    public Participant(String name, Gender gender, String club, Integer age, List<Discipline> disciplines) {
         this.name = name;
         this.gender = gender;
         this.club = club;
