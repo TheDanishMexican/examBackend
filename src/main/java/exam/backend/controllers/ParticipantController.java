@@ -27,4 +27,10 @@ public class ParticipantController {
        return ResponseEntity.ok(participantService.addParticipant(request));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ParticipantDto> editParticipant(@RequestBody ParticipantDto request, @PathVariable int id) {
+        return ResponseEntity.ok(participantService.editParticipant(request, id));
+    }
+
+
 }

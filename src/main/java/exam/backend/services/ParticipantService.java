@@ -21,20 +21,26 @@ public class ParticipantService {
         this.disciplineService = disciplineService;
     }
 
+    public List<Discipline> getDisciplinesFromName(List<String> disciplineNames) {
+        HashMap<String, Discipline> disciplineMap = disciplineService.getDisciplineMap();
+
+        List<Discipline> disciplines = new ArrayList<>();
+
+        for (String disciplineName : disciplineNames) {
+            Discipline add =disciplineMap.get(disciplineName);
+            disciplines.add(add);
+        }
+
+        return disciplines;
+    }
+
     public List<Participant> getAllParticipants() {
         return participantRepository.findAll();
     }
 
     public ParticipantDto addParticipant(ParticipantDto request) {
 
-    HashMap<String, Discipline> disciplineMap = disciplineService.getDisciplineMap();
-
-    List<Discipline> disciplines = new ArrayList<>();
-
-    for (String disciplineName : request.disciplineNames()) {
-        Discipline add =disciplineMap.get(disciplineName);
-        disciplines.add(add);
-    }
+        List<Discipline> disciplines = getDisciplinesFromName(request.disciplineNames());
 
         Participant newParticipant = new Participant(request.name(), request.gender(), request.club(),
                 request.age(), disciplines);
@@ -56,5 +62,17 @@ public class ParticipantService {
                 participant.getClub(), participant.getAge(), disciplineNames);
     }
 
+    public ParticipantDto editParticipant(ParticipantDto request, int id) {
+        Participant participant = participantRepository.findById(id).orElseThrow();
+
+        participant.setDisciplines(getDisciplinesFromName(request.disciplineNames()));
+        participant.setName(request.name());
+        participant.setAge(request.age());
+        participant.setClub(request.club());
+
+        participantRepository.save(participant);
+
+        return toDto(participant);
+    }
 }
 
