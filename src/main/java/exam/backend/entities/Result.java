@@ -21,4 +21,20 @@ public class Result {
 
     @Enumerated(EnumType.STRING)
     private ResultType resultType;
+
+    private String resultValue;
+
+    @ManyToOne
+    private Participant participant;
+
+    @ManyToOne
+    private Discipline discipline;
+
+    public Result(LocalDate date, ResultType resultType, String resultValue, Participant participant, Discipline discipline) {
+        this.date = date;
+        this.resultType = resultType;
+        this.resultValue = resultValue;
+        this.participant = participant;
+        this.discipline = discipline;
+    }
 }
