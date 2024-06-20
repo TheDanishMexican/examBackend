@@ -43,8 +43,9 @@ public class CreateData implements CommandLineRunner {
         Discipline discipline2 = new Discipline("Long jump", ResultType.DISTANCE);
         Discipline discipline3 = new Discipline("High jump", ResultType.DISTANCE);
         Discipline discipline4 = new Discipline("Discos throw", ResultType.DISTANCE);
+        Discipline discipline5 = new Discipline("Gymnastics", ResultType.POINTS);
 
-        List<Discipline> disciplines = List.of(discipline1, discipline2, discipline3, discipline4);
+        List<Discipline> disciplines = List.of(discipline1, discipline2, discipline3, discipline4, discipline5);
 
         disciplineRepository.saveAll(disciplines);
 
@@ -59,11 +60,12 @@ public class CreateData implements CommandLineRunner {
         Discipline longJump = disciplinesByName.get("Long jump");
         Discipline highJump = disciplinesByName.get("High jump");
         Discipline discosThrow = disciplinesByName.get("Discos throw");
+        Discipline gymnastics = disciplinesByName.get("Gymnastics");
 
         Participant participant1 = new Participant("Daniel", Gender.MALE, "Aalborg", 25, List.of(sprint100m, longJump));
         Participant participant2 = new Participant("Line", Gender.FEMALE, "Aarhus", 30, List.of(highJump, discosThrow));
-        Participant participant3 = new Participant("Erik", Gender.MALE, "Copenhagen", 35, List.of(sprint100m, highJump));
-        Participant participant4 = new Participant("Mette", Gender.FEMALE, "Odense", 40, List.of(longJump, discosThrow));
+        Participant participant3 = new Participant("Erik", Gender.MALE, "Copenhagen", 35, List.of(sprint100m, highJump, gymnastics));
+        Participant participant4 = new Participant("Mette", Gender.FEMALE, "Odense", 40, List.of(longJump, discosThrow, gymnastics));
 
         List<Participant> participants = List.of(participant1, participant2, participant3, participant4);
 
@@ -84,12 +86,17 @@ public class CreateData implements CommandLineRunner {
         Discipline longJump = disciplinesByName.get("Long jump");
         Discipline highJump = disciplinesByName.get("High jump");
         Discipline discosThrow = disciplinesByName.get("Discos throw");
+        Discipline gymnastics = disciplinesByName.get("Gymnastics");
 
         Result result1 = new Result(LocalDate.of(2024, 6, 20), ResultType.TIME, "10.5", daniel, sprint100m);
-        Result result2 = new Result(LocalDate.of(2024, 6, 20), ResultType.DISTANCE, "7.5", daniel, longJump);
+        Result result2 = new Result(LocalDate.of(2024, 6, 21), ResultType.DISTANCE, "7.5", daniel, longJump);
         Result result3 = new Result(LocalDate.of(2024, 6, 20), ResultType.DISTANCE, "1.5", daniel, highJump);
+        Result result4 = new Result(LocalDate.of(2024, 6, 12), ResultType.DISTANCE, "50", line, discosThrow);
+        Result result5 = new Result(LocalDate.of(2024, 6, 20), ResultType.POINTS, "37.2", mette, gymnastics);
+        Result result6 = new Result(LocalDate.of(2024, 6, 3), ResultType.POINTS, "11.5", erik, gymnastics);
 
-        List<Result> results = List.of(result1, result2, result3);
+
+        List<Result> results = List.of(result1, result2, result3, result4, result5, result6);
 
         resultRepository.saveAll(results);
     }

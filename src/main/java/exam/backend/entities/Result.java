@@ -30,11 +30,27 @@ public class Result {
     @ManyToOne
     private Discipline discipline;
 
+    private String resultSuffix;
+
     public Result(LocalDate date, ResultType resultType, String resultValue, Participant participant, Discipline discipline) {
         this.date = date;
         this.resultType = resultType;
         this.resultValue = resultValue;
         this.participant = participant;
         this.discipline = discipline;
+        decideResultSuffix();
     }
+
+    public void decideResultSuffix() {
+        switch(resultType) {
+            case TIME:
+                resultSuffix = "Time in MM:SS:MS";
+                break;
+            case DISTANCE:
+                resultSuffix = "Meters";
+                break;
+            case POINTS:
+                resultSuffix = "Points";
+                break;
+    }}
 }
