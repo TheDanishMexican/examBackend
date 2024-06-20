@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "participants")
 @NoArgsConstructor
@@ -25,10 +27,14 @@ public class Participant {
 
     private Integer age;
 
-    public Participant(String name, Gender gender, Club club, Integer age) {
+    @ManyToMany
+    private List<Discipline> disciplines;
+
+    public Participant(String name, Gender gender, Club club, Integer age, List<Discipline> disciplines) {
         this.name = name;
         this.gender = gender;
         this.club = club;
         this.age = age;
+        this.disciplines = disciplines;
     }
 }
