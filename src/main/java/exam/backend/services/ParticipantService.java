@@ -5,6 +5,7 @@ import exam.backend.entities.Discipline;
 import exam.backend.entities.Participant;
 import exam.backend.repositories.DisciplineRepository;
 import exam.backend.repositories.ParticipantRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -73,6 +74,14 @@ public class ParticipantService {
         participantRepository.save(participant);
 
         return toDto(participant);
+    }
+
+    public ResponseEntity<Void> deleteParticipant(int id) {
+        Participant participant = participantRepository.findById(id).orElseThrow();
+
+        participantRepository.delete(participant);
+
+        return ResponseEntity.noContent().build();
     }
 }
 
