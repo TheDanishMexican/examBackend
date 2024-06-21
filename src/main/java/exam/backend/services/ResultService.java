@@ -34,11 +34,10 @@ public class ResultService {
         Discipline discipline = disciplineRepository.findById(request.disciplineId()).orElseThrow();
         LocalDate date = LocalDate.parse(request.date());
 
-        Result result = new Result(date, request.resultType(),
+        Result result = new Result(date, discipline.getResultType(),
                 request.resultValue(), participant, discipline);
 
 
         return resultRepository.save(result);
-
     }
 }
