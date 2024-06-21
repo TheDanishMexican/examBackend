@@ -1,6 +1,7 @@
 package exam.backend.services;
 
 import exam.backend.dto.ResultDto;
+import exam.backend.dto.UpdateResultDto;
 import exam.backend.entities.Discipline;
 import exam.backend.entities.Participant;
 import exam.backend.entities.Result;
@@ -39,5 +40,24 @@ public class ResultService {
 
 
         return resultRepository.save(result);
+    }
+
+    public Result updateResult(Integer id, UpdateResultDto request) {
+        Result result = resultRepository.findById(id).orElseThrow();
+        Participant participant = participantRepository.findById(request.participantId()).orElseThrow();
+        Discipline discipline = disciplineRepository.findById(request.disciplineId()).orElseThrow();
+        LocalDate date = LocalDate.parse(request.date());
+
+        result.setDate(date);
+        result.setParticipant(participant);
+        result.setDiscipline(discipline);
+        result.setResultValue(request.resultValue());
+        result.decideResultSuffix();
+
+        return resultRepository.save(result);
+    }
+
+    public void deleteResult(Integer id) {
+        resultRepository.deleteById(id);
     }
 }

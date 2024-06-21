@@ -1,6 +1,7 @@
 package exam.backend.controllers;
 
 import exam.backend.dto.ResultDto;
+import exam.backend.dto.UpdateResultDto;
 import exam.backend.entities.Result;
 import exam.backend.services.ResultService;
 import org.springframework.http.ResponseEntity;
@@ -26,5 +27,16 @@ public class ResultController {
     public ResponseEntity<Result> addResult(@RequestBody ResultDto request) {
         System.out.println(request);
         return ResponseEntity.ok(resultService.addResult(request));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Result> updateResult(@PathVariable Integer id, @RequestBody UpdateResultDto request) {
+        return ResponseEntity.ok(resultService.updateResult(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteResult(@PathVariable Integer id) {
+        resultService.deleteResult(id);
+        return ResponseEntity.noContent().build();
     }
 }
